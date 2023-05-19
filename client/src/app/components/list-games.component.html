@@ -1,0 +1,20 @@
+<h2>
+  Games per page
+  <select (change)="fetchChanges(perPage.value)" #perPage>
+    <option value="10">10</option>
+    <option value="15">15</option>
+    <option value="20">20</option>
+  </select>
+</h2>
+
+<div *ngIf="games$ | async as games; else blank">
+  <div *ngFor="let game of games">
+    <a href="/api/game/{{ game.gid }}">{{ game.name }} ({{ game.gid }})</a>
+  </div>
+</div>
+
+<div>
+  <button type="button" (click)="page(-1)">Previous Page</button>
+  <button type="button" (click)="page(1)">Next Page</button>
+</div>
+<ng-template #blank></ng-template>
